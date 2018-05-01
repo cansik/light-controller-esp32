@@ -14,6 +14,12 @@ class RainbowScene : public BaseScene {
 protected:
     LEDChain *ledChain;
 
+    CRGBPalette16 currentPalette;
+    TBlendType currentBlending;
+
+    uint8_t startIndex = 0;
+    uint8_t brightness = 255;
+
 public:
     RainbowScene(LEDChain* ledChain);
 
