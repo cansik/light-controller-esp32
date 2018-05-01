@@ -11,10 +11,12 @@ ArtnetScene::ArtnetScene(LEDChain *ledChain) : BaseScene("ArtNet Scene") {
 void ArtnetScene::setup() {
     BaseScene::setup();
 
+    instance = this;
+
     artnet.begin();
 
-    artnet.setArtDmxCallback(onDmxFrame);
-    artnet.setArtSyncCallback(onSync);
+    artnet.setArtDmxCallback(onDmxFrameStatic);
+    artnet.setArtSyncCallback(onSyncStatic);
 }
 
 void ArtnetScene::loop() {
@@ -37,4 +39,13 @@ void ArtnetScene::onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequenc
 
 void ArtnetScene::onSync(IPAddress remoteIP) {
 
+}
+
+void
+ArtnetScene::onDmxFrameStatic(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t *data, IPAddress remoteIP) {
+    instance->onDmxFrame(universe, length, sequence, data, remoteIP);
+}
+
+void ArtnetScene::onSyncStatic(IPAddress remoteIP) {
+    instance->onSync(remoteIP);
 }

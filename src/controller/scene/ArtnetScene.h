@@ -28,7 +28,13 @@ public:
     void onDmxFrame(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t* data, IPAddress remoteIP);
 
     void onSync(IPAddress remoteIP);
+
+    static void onDmxFrameStatic(uint16_t universe, uint16_t length, uint8_t sequence, uint8_t *data, IPAddress remoteIP);
+
+    static void onSyncStatic(IPAddress remoteIP);
 };
 
 
 #endif //ANN_A_ARTNETSCENE_H
+
+static ArtnetScene *instance = new ArtnetScene(new LEDChain(10));
