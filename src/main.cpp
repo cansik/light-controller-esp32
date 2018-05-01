@@ -1,3 +1,5 @@
+#define FASTLED_ESP8266_RAW_PIN_ORDER
+
 #include <Arduino.h>
 #include <ESP8266mDNS.h>
 #include <util/PlatformConstants.h>
@@ -29,9 +31,7 @@
 #define OSC_IN_PORT 8000
 
 // Fast LED
-#define FASTLED_ESP8266_NODEMCU_PIN_ORDER
-
-#define NUM_LEDS 144
+#define NUM_LEDS 30
 #define LED_DATA_PIN D4
 
 #define UPDATES_PER_SECOND 100
@@ -47,7 +47,7 @@ auto ledChain = LEDChain(NUM_LEDS);
 auto network = NetworkController(DEVICE_NAME, SSID_NAME, SSID_PASSWORD, WIFI_AP);
 auto ota = OTAController(DEVICE_NAME, OTA_PASSWORD, OTA_PORT);
 auto osc = OscController(OSC_IN_PORT, OSC_OUT_PORT);
-BaseRenderer *ledRenderer = new FastLEDRenderer(UPDATES_PER_SECOND);
+FastLEDRenderer ledRenderer = FastLEDRenderer(UPDATES_PER_SECOND);
 
 // scenes
 auto rainbowScene = RainbowScene(&ledChain);
@@ -59,7 +59,7 @@ BaseControllerPtr controllers[] = {
         &ota,
         &osc,
         &sceneController,
-        ledRenderer
+        &ledRenderer
 };
 
 void setup() {
@@ -73,6 +73,7 @@ void setup() {
 
     // setup strips
     ledChain.setup<LED_DATA_PIN>();
+    ledChain.all(CRGB::Black);
 
     // setup controllers
     for (auto &controller : controllers) {
