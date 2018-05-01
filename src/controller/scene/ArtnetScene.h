@@ -37,4 +37,4 @@ public:
 
 #endif //ANN_A_ARTNETSCENE_H
 
-static ArtnetScene *instance = new ArtnetScene(new LEDChain(10));
+static ArtnetScene *artnetSceneInstance = new ArtnetScene(new LEDChain(10));
