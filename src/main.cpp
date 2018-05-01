@@ -12,6 +12,7 @@
 #include <controller/scene/SceneController.h>
 #include <renderer/BaseRenderer.h>
 #include <renderer/FastLEDRenderer.h>
+#include <controller/scene/ArtnetScene.h>
 
 // global
 
@@ -36,7 +37,6 @@
 
 #define UPDATES_PER_SECOND 100
 
-
 // typedefs
 typedef BaseController *BaseControllerPtr;
 
@@ -51,7 +51,8 @@ auto ledRenderer = FastLEDRenderer(UPDATES_PER_SECOND);
 
 // scenes
 auto rainbowScene = RainbowScene(&ledChain);
-auto sceneController = SceneController(&rainbowScene);
+auto artnetScene = ArtnetScene(&ledChain);
+auto sceneController = SceneController(&artnetScene);
 
 // controller list
 BaseControllerPtr controllers[] = {
