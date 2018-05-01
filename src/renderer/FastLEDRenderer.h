@@ -10,10 +10,11 @@
 
 class FastLEDRenderer : public BaseRenderer {
 protected:
-    explicit FastLEDRenderer(const unsigned long updatesPerSecond);
     unsigned long updatesPerSecond;
 
 public:
+    explicit FastLEDRenderer(unsigned long updatesPerSecond);
+
     void setup() override;
 
     virtual void render();

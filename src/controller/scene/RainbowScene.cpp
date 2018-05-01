@@ -4,13 +4,17 @@
 
 #include "RainbowScene.h"
 
-RainbowScene::RainbowScene() : BaseScene("RainbowScene") {
-}
-
 void RainbowScene::setup() {
     BaseScene::setup();
 }
 
 void RainbowScene::loop() {
     BaseScene::loop();
+
+    // change led
+    ledChain->all(CRGB::Cyan);
+}
+
+RainbowScene::RainbowScene(LEDChain *ledChain) : BaseScene("RainbowScene") {
+    this->ledChain = ledChain;
 }
