@@ -1,4 +1,2 @@
-# ANN-A
-Artificial neural network as an artistic installation.
-
-![ANN-A visualisation](readme/visualisation.png)
+# Light Controller for ESP32
+An example app on how to control light.
